@@ -14,3 +14,4 @@ const Footer: React.SFC<IFooterProps> = (props: IFooterProps) => {
 };
 
 export default Footer;
+
