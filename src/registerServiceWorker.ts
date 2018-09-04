@@ -1,4 +1,5 @@
-// tslint:disable:no-console
+/* tslint:disable */
+
 // In production, we register a service worker to serve assets from local cache.
 
 // This lets the app load faster on subsequent visits in production, and gives
@@ -19,7 +20,7 @@ const isLocalhost = Boolean(
     )
 );
 
-export default function register() {
+export default function register(): void {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(
@@ -56,7 +57,7 @@ export default function register() {
   }
 }
 
-function registerValidSW(swUrl: string) {
+function registerValidSW(swUrl: string): void {
   navigator.serviceWorker
     .register(swUrl)
     .then(registration => {
@@ -87,7 +88,7 @@ function registerValidSW(swUrl: string) {
     });
 }
 
-function checkValidServiceWorker(swUrl: string) {
+function checkValidServiceWorker(swUrl: string): void {
   // Check if the service worker can be found. If it can't reload the page.
   fetch(swUrl)
     .then(response => {
@@ -114,7 +115,7 @@ function checkValidServiceWorker(swUrl: string) {
     });
 }
 
-export function unregister() {
+export function unregister(): void {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.ready.then(registration => {
       registration.unregister();

@@ -1,6 +1,6 @@
 {
-  "name": "samplereact",
-  "version": "0.1.0",
+  "name": "@sands/samplereact",
+  "version": "0.0.0-development",
   "private": true,
   "dependencies": {
     "react": "^16.4.2",
@@ -9,15 +9,58 @@
   },
   "scripts": {
     "start": "react-scripts-ts start",
-    "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+    "eject": "react-scripts-ts eject",
+    "lint": "node node_modules/tslint/bin/tslint src/**/*.ts*",
+    "tsc": "node node_modules/typescript/bin/tsc",
+    "build": "npm run clean && npm run tsc && react-scripts-ts build",
+    "clean": "rimraf lib",
+    "commit": "npx git-cz",
+    "commitmsg": "validate-commit-msg"
   },
   "devDependencies": {
     "@types/jest": "^23.3.1",
     "@types/node": "^10.9.4",
     "@types/react": "^16.4.13",
     "@types/react-dom": "^16.0.7",
-    "typescript": "^3.0.3"
+    "commitizen": "^2.10.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "husky": "^0.14.3",
+    "tslint-immutable": "^4.7.0",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.0.3",
+    "validate-commit-msg": "^2.14.0"
+  },
+  "config": {
+    "validate-commit-msg": {
+      "types": [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "chore",
+        "revert",
+        "ci",
+        "build"
+      ],
+      "scope": {
+        "required": true,
+        "allowed": "*",
+        "validate": true,
+        "multiple": false
+      },
+      "warnOnFail": false,
+      "maxSubjectLength": 100,
+      "subjectPattern": ".+",
+      "subjectPatternErrorMsg": "subject does not match subject pattern!",
+      "helpMessage": "Your commit message did not conform to <type>(<scope>): <subject>. Use `npm run commit` to get guided commits.",
+      "autoFix": false
+    },
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }

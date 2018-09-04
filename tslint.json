@@ -1,10 +1,37 @@
 {
-  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier", "tslint-immutable"],
   "linterOptions": {
     "exclude": [
       "config/**/*.js",
       "node_modules/**/*.ts",
       "coverage/lcov-report/*.js"
     ]
+  },
+  "rules": {
+    "ordered-imports": false,
+    "only-arrow-functions": false,
+    "no-console": false,
+    "max-classes-per-file": false,
+    "no-empty-interface": false,
+    
+    // Recommended built-in rules
+    "no-var-keyword": true,
+    "no-parameter-reassignment": true,
+    "typedef": [true, "call-signature"],
+ 
+    // Immutability rules
+    "readonly-keyword": true,
+    "readonly-array": true,
+    "no-let": true,
+    "no-object-mutation": true,
+    "no-delete": true,
+    "no-method-signature": true,
+ 
+    // Functional style rules
+    "no-this": true,
+    "no-class": true,
+    "no-mixed-interface": true,
+    "no-expression-statement": true,
+    "no-if-statement": true
   }
 }
