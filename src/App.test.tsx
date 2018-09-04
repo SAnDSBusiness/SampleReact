@@ -6,6 +6,7 @@ import App from './App';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<App welcomeText="hello"/>, div);
+  const onChangeGreeting = () => {return;}
+  ReactDOM.render(<App welcomeText="hello" onChangeGreeting={onChangeGreeting}/>, div);
   ReactDOM.unmountComponentAtNode(div);
 });

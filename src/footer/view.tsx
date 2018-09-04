@@ -3,7 +3,8 @@ import * as React from 'react';
 interface IFooterProps {
   readonly footerText: string
 }
-const Footer: React.SFC<IFooterProps> = (props: IFooterProps) => {
+
+const FooterView: React.SFC<IFooterProps> = (props: IFooterProps) => {
   return (
     <div className="Footer">
       <p className="App-intro">
@@ -13,5 +14,5 @@ const Footer: React.SFC<IFooterProps> = (props: IFooterProps) => {
   );
 };
 
-export default Footer;
+export default FooterView;
 
