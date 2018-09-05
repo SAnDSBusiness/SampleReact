@@ -5,8 +5,12 @@ import { Provider, connect } from 'react-redux';
 import App from './App';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { createBrowserHistory } from 'history';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
+
+const history = createBrowserHistory()
 
 interface IModel {
   readonly greeting: string;
@@ -61,9 +65,13 @@ export const saveState = (state: any) => {
 
 const persistedState = loadState();
 const store = createStore(
-  reducer,
+  connectRouter(history)(reducer),
   persistedState,
-  composeWithDevTools(),
+  composeWithDevTools(
+    applyMiddleware(
+      routerMiddleware(history)
+    ),
+  ),
 );
 
 store.subscribe(() => {
@@ -90,9 +98,19 @@ const mapDispatchToProps = (dispatch: (message: IMessage) => void) => {
 
 const ReduxConnectedApp = connect<{readonly welcomeText: string}, {readonly onChangeGreeting: (newMessage: string) => void}, {}, IModel>(mapStateToProps, mapDispatchToProps)(App);
 
+import { Route, Switch } from 'react-router-dom' // react-router v4
+import { ConnectedRouter } from 'connected-react-router'
+
 ReactDOM.render(
   <Provider store={store}>
-    <ReduxConnectedApp/>
+    <ConnectedRouter history={history}>
+        <div> { /* your usual react-router v4 routing */ }
+          <Switch>
+            <Route exact={true} path="/" render={() => (<ReduxConnectedApp/>)} />
+            <Route render={() => (<ReduxConnectedApp/>)} />
+          </Switch>
+        </div>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root') as HTMLElement
 );

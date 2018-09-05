@@ -31,6 +31,8 @@
     "no-this": true,
     "no-mixed-interface": false,
     "no-expression-statement": false,
-    "no-if-statement": false
+    "no-if-statement": false,
+
+    "jsx-no-lambda":false
   }
 }
