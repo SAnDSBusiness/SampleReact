@@ -1,8 +1,8 @@
 /* tslint:disable: no-expression-statement  */
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Provider, connect } from 'react-redux';
-import App from './App';
+import { Provider } from 'react-redux';
+import App from './app/App';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import { applyMiddleware, createStore } from 'redux'
@@ -78,39 +78,27 @@ store.subscribe(() => {
   saveState(store.getState());
 });
 
-const mapStateToProps = (state: IModel, ownProps: any) => {
-  return {
-    welcomeText: state.greeting +  " user"
-  }
-}
-​
-const mapDispatchToProps = (dispatch: (message: IMessage) => void) => {
-  return {
-    onChangeGreeting: (newMessage: string) => {
-      const actionMessage: IActionChangeGreeting = {
-        payload: newMessage,
-        type: Actions.CHANGE_GREETING
-      }
-      dispatch(actionMessage)
-    }
-  }
-}
-
-const ReduxConnectedApp = connect<{readonly welcomeText: string}, {readonly onChangeGreeting: (newMessage: string) => void}, {}, IModel>(mapStateToProps, mapDispatchToProps)(App);
-
-import { Route, Switch } from 'react-router-dom' // react-router v4
-import { ConnectedRouter } from 'connected-react-router'
+// const mapStateToProps = (state: IModel, ownProps: any) => {
+//   return {
+//     welcomeText: state.greeting +  " user"
+//   }
+// }
+// ​
+// const mapDispatchToProps = (dispatch: (message: IMessage) => void) => {
+//   return {
+//     onChangeGreeting: (newMessage: string) => {
+//       const actionMessage: IActionChangeGreeting = {
+//         payload: newMessage,
+//         type: Actions.CHANGE_GREETING
+//       }
+//       dispatch(actionMessage)
+//     }
+//   }
+// }
 
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-        <div> { /* your usual react-router v4 routing */ }
-          <Switch>
-            <Route exact={true} path="/" render={() => (<ReduxConnectedApp/>)} />
-            <Route render={() => (<ReduxConnectedApp/>)} />
-          </Switch>
-        </div>
-    </ConnectedRouter>
+    <App history={history} />
   </Provider>,
   document.getElementById('root') as HTMLElement
 );
