@@ -15,7 +15,8 @@
   },
   "scripts": {
     "start": "react-scripts-ts start",
-    "test": "react-scripts-ts test --env=jsdom",
+    "test": "CI=true react-scripts-ts test --env=jsdom",
+    "testwatch": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
     "lint": "node node_modules/tslint/bin/tslint src/**/*.ts*",
     "tsc": "node node_modules/typescript/bin/tsc",
