@@ -16,7 +16,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 sh '''#!/bin/bash -l
-                    set -e
+                    set -ex
                     echo $0
                     git config credential.username \$env:GH_USERNAME
                     git config credential.helper \"!echo password=\$env:GH_TOKEN; echo\"
