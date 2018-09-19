@@ -15,17 +15,20 @@ pipeline {
         stage('Build Test and Release') {
             steps {
                 echo 'Building..'
-                sh 'git config credential.username \$env:GH_USERNAME'
-                sh 'git config credential.helper \"!echo password=\$env:GH_TOKEN; echo\"'
-                sh 'curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash'
-                sh 'export NVM_DIR="$HOME/.nvm"'
-                sh '''export NVM_DIR="$HOME/.nvm"
-                    [ -s "$NVM_DIR/nvm.sh" ] && \\. "$NVM_DIR/nvm.sh"'''
-                sh 'nvm install'
-                sh 'npm install @datatransparency/devops'
-                sh 'npx devops ci'
-                sh 'git config --unset credential.username'
-                sh 'git config --unset credential.helper'
+                sh '''#!/bin/bash -l
+                    set -e
+                    echo $0
+                    git config credential.username \$env:GH_USERNAME
+                    git config credential.helper \"!echo password=\$env:GH_TOKEN; echo\"
+                    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+                    export NVM_DIR="$HOME/.nvm"
+                    [ -s "$NVM_DIR/nvm.sh" ] && \\. "$NVM_DIR/nvm.sh"
+                    nvm install
+                    npm install @datatransparency/devops
+                    npx devops ci
+                    git config --unset credential.username
+                    git config --unset credential.helper'''
+                    
             }
         }
     }
