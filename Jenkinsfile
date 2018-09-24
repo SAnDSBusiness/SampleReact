@@ -17,7 +17,6 @@ pipeline {
                 echo 'Building..'
                 sh '''#!/bin/bash -l
                     set -ex
-                    echo $0
                     git config credential.username \$env:GH_USERNAME
                     git config credential.helper \"!echo password=\$env:GH_TOKEN; echo\"
                     curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
